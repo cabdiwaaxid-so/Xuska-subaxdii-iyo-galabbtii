@@ -1,0 +1,50 @@
+{
+  "name": "Xuska Subaxdii iyo Galabtii",
+  "short_name": "Xuska",
+  "description": "App ka xuska Subaxdii iyo Galabtii ee Islaamka",
+  "lang": "so",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#2c786c",
+  "background_color": "#faf5e4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "religious", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Subax",
+      "short_name": "Subax",
+      "description": "Ku bilow xuska Subaxdii",
+      "url": "/?time=subax",
+      "icons": [{ "src": "logo.jpg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Galab",
+      "short_name": "Galab",
+      "description": "Ku bilow xuska Galabtii",
+      "url": "/?time=galab",
+      "icons": [{ "src": "logo.jpg", "sizes": "96x96" }]
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+xuska",
+      "url": "/?time=%s"
+    }
+  ]
+}
