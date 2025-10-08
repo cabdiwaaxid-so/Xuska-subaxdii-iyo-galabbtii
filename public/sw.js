@@ -5,7 +5,12 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/data.json',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css?family=Segoe+UI|Traditional+Arabic|Uthmanic+Hafs'
+  'https://fonts.googleapis.com/css?family=Segoe+UI|Traditional+Arabic|Uthmanic+Hafs',
+  '/styles.css',
+  '/script.js',
+  '/so.json',
+  '/ar.json',
+  '/en.json'
 ];
 
 // Install event - cache all essential assets
@@ -100,40 +105,4 @@ self.addEventListener('sync', (event) => {
         })
     );
   }
-});
-
-// Push notification event handler
-self.addEventListener('push', (event) => {
-  const data = event.data.json();
-  const options = {
-    body: data.body,
-    icon: 'logo.jpg',
-    badge: 'logo.jpg',
-    vibrate: [100, 50, 100],
-    data: {
-      url: data.url || '/'
-    }
-  };
-
-  event.waitUntil(
-    self.registration.showNotification(data.title, options)
-  );
-});
-
-// Notification click handler
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(
-    clients.matchAll({ type: 'window' })
-      .then((clientList) => {
-        for (const client of clientList) {
-          if (client.url === event.notification.data.url && 'focus' in client) {
-            return client.focus();
-          }
-        }
-        if (clients.openWindow) {
-          return clients.openWindow(event.notification.data.url || '/');
-        }
-      })
-  );
 });

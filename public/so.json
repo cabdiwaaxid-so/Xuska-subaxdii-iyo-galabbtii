@@ -1,0 +1,33 @@
+{
+  "app": {
+    "title": "Xuska Subaxdii iyo Galabtii",
+    "short_name": "Xuska",
+    "description": "App ka xuska Subaxdii iyo Galabtii ee Islaamka"
+  },
+  "navigation": {
+    "morning": "Subax",
+    "evening": "Galab",
+    "settings": "Dejinta"
+  },
+  "content": {
+    "intro": "Bismillaah, ku xuso xuska Subaxdii iyo Galabtii si aad u hesho ammaanada Eebe.",
+    "loading": "Soo dejineynaa xuska...",
+    "error": "Khalad ka dhacay soo dejinta xuska. Fadlan isku day mar kale."
+  },
+  "settings": {
+    "title": "Dejinta",
+    "font_size": "Cabbirka Font",
+    "font_small": "Yar",
+    "font_medium": "Caadi",
+    "font_large": "Weyn",
+    "theme": "Middo",
+    "theme_light": "Iftiin",
+    "theme_dark": "Gudcur",
+    "language": "Luqad"
+  },
+  "counter": {
+    "reset": "Dib u bilow",
+    "increment": "Kordhi",
+    "completed": "Dhamaaday"
+  }
+}

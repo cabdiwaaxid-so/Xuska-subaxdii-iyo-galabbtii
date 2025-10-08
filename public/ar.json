@@ -1,0 +1,33 @@
+{
+  "app": {
+    "title": "أذكار الصباح والمساء",
+    "short_name": "الأذكار",
+    "description": "تطبيق أذكار الصباح والمساء الإسلامية"
+  },
+  "navigation": {
+    "morning": "الصباح",
+    "evening": "المساء",
+    "settings": "الإعدادات"
+  },
+  "content": {
+    "intro": "بسم الله، اذكر أذكار الصباح والمساء لنيل رضا الله تعالى.",
+    "loading": "جاري تحميل الأذكار...",
+    "error": "خطأ في تحميل الأذكار. يرجى المحاولة مرة أخرى."
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "font_size": "حجم الخط",
+    "font_small": "صغير",
+    "font_medium": "متوسط",
+    "font_large": "كبير",
+    "theme": "السمة",
+    "theme_light": "فاتح",
+    "theme_dark": "غامق",
+    "language": "اللغة"
+  },
+  "counter": {
+    "reset": "إعادة",
+    "increment": "زيادة",
+    "completed": "مكتمل"
+  }
+}

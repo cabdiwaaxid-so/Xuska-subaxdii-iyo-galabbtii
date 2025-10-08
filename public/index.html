@@ -9,356 +9,57 @@
   <link rel="icon" href="logo.jpg">
   <link rel="manifest" href="manifest.json">
   <script>
-  // Register Service Worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
         .then(registration => {
           console.log('ServiceWorker registration successful');
         })
         .catch(err => {
           console.log('ServiceWorker registration failed: ', err);
         });
-    });
-  }
-</script>
-  <style>
-    :root {
-      --primary-color: #2c786c;
-      --secondary-color: #004445;
-      --accent-color: #f8b400;
-      --light-color: #faf5e4;
-      --dark-color: #333;
-      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --border-radius: 10px;
+      });
     }
-    
-    :root.dark {
-      --light-color: #1a1a1a;
-      --dark-color: #f5f5f5;
-      --primary-color: #3aafa9;
-      --secondary-color: #2b7a78;
-      --accent-color: #ffc107;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-      background-color: var(--light-color);
-      color: var(--dark-color);
-      line-height: 1.6;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    
-    .container {
-      max-width: 100%;
-      padding: 0 15px;
-      margin: 0 auto;
-    }
-    
-    header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 1rem;
-    }
-    
-    h1 {
-      font-size: 1.5rem;
-      margin: 0;
-    }
-    
-    .settings-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-    
-    .time-selector {
-      display: flex;
-      justify-content: center;
-      margin: 1rem 0;
-      background-color: white;
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      position: sticky;
-      top: 3rem;
-      z-index: 100;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-    
-    .dark .time-selector {
-      background-color: #2a2a2a;
-    }
-    
-    .time-btn {
-      flex: 1;
-      padding: 0.8rem;
-      border: none;
-      background: none;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: var(--dark-color);
-    }
-    
-    .dark .time-btn {
-      color: #f5f5f5;
-    }
-    
-    .time-btn.active {
-      background-color: var(--primary-color);
-      color: white;
-    }
-    
-    .adhkar-container {
-      margin-bottom: 4rem;
-    }
-    
-    .dhikr-card {
-      background-color: white;
-      border-radius: var(--border-radius);
-      padding: 1.2rem;
-      margin-bottom: 1rem;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-    
-    .dark .dhikr-card {
-      background-color: #2a2a2a;
-    }
-    
-    .dhikr-arabic {
-      font-size: 1.8rem;
-      text-align: right;
-      margin-bottom: 1rem;
-      line-height: 2.5rem;
-      color: var(--secondary-color);
-      font-weight: bold;
-    }
-    
-    .dark .dhikr-arabic {
-      color: #3aafa9;
-    }
-    
-    .dhikr-count {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: var(--accent-color);
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-    
-    .counter-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1rem;
-      flex-direction: row;
-      direction: ltr;
-      position: relative;
-      gap: 10px;
-    }
-    
-    .counter-btn {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      aspect-ratio: 1;
-      transition: all 0.3s ease;
-    }
-    
-    .counter-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-    
-    .plus-btn {
-      width: 100%;
-      height: 60px;
-      border-radius: var(--border-radius);
-    }
-    
-    .counter-btn:active {
-      transform: scale(0.95);
-    }
-    
-    .counter-display {
-      font-size: 1.2rem;
-      min-width: 30px;
-      text-align: center;
-    }
-    
-    .completed {
-      color: var(--primary-color);
-      font-weight: bold;
-      margin-left: 0.5rem;
-    }
-    
-    .intro-text {
-      text-align: center;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      background-color: white;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-    }
-    
-    .dark .intro-text {
-      background-color: #2a2a2a;
-    }
-    
-    .loading {
-      text-align: center;
-      padding: 2rem;
-      font-size: 1.2rem;
-    }
-    
-    .settings-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      max-width: 300px;
-      height: 100%;
-      background-color: white;
-      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-      transition: right 0.3s ease;
-      z-index: 1000;
-      padding: 1rem;
-      overflow-y: auto;
-    }
-    
-    .dark .settings-menu {
-      background-color: #2a2a2a;
-      color: #f5f5f5;
-    }
-    
-    .settings-menu.open {
-      right: 0;
-    }
-    
-    .settings-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .dark .settings-header {
-      border-bottom: 1px solid #444;
-    }
-    
-    .close-settings {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--dark-color);
-    }
-    
-    .setting-option {
-      margin-bottom: 1rem;
-    }
-    
-    .setting-option h3 {
-      margin-bottom: 0.5rem;
-    }
-    
-    select {
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      background-color: white;
-      color: var(--dark-color);
-    }
-    
-    .dark select {
-      background-color: #333;
-      color: #f5f5f5;
-      border-color: #555;
-    }
-    
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      display: none;
-    }
-    
-    .overlay.active {
-      display: block;
-    }
-    
-    @media (min-width: 768px) {
-      .container {
-        max-width: 720px;
-      }
-      
-      h1 {
-        font-size: 1.8rem;
-      }
-    }
-    
-    @media (min-width: 992px) {
-      .container {
-        max-width: 960px;
-      }
-    }
-  </style>
+  </script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Language Selection Modal -->
+  <div class="language-modal" id="languageModal">
+    <div class="language-modal-content">
+      <h2>Please select your language / Fadlan dooro luqadaada / الرجاء اختيار اللغة</h2>
+      <div class="language-options">
+        <button class="language-option" data-lang="so">
+          <span class="flag">🇸🇴</span>
+          <span class="lang-name">Soomaali</span>
+        </button>
+        <button class="language-option" data-lang="en">
+          <span class="flag">🇺🇸</span>
+          <span class="lang-name">English</span>
+        </button>
+        <button class="language-option" data-lang="ar">
+          <span class="flag">🇸🇦</span>
+          <span class="lang-name">العربية</span>
+        </button>
+      </div>
+      <p class="language-note">You can change this later in settings / Waxaad ku bedeli kartaa settings-ka / يمكنك تغيير هذا لاحقاً في الإعدادات</p>
+    </div>
+  </div>
+
   <header>
     <div class="header-content container">
-      <h1>Xuska Subaxdii iyo Galabtii</h1>
-      <button class="settings-btn" id="settingsBtn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>
-      </button>
+      <h1 id="appTitle">Xuska Subaxdii iyo Galabtii</h1>
+      <div class="header-actions">
+        <button class="language-switcher" id="languageSwitcher" title="Change language">
+          <span id="currentLang">SO</span>
+        </button>
+        <button class="settings-btn" id="settingsBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
   
@@ -369,12 +70,12 @@
     </div>
     
     <div class="intro-text">
-      <p>Bismillaah, ku xuso xuska Subaxdii iyo Galabtii si aad u hesho ammaanada Eebe.</p>
+      <p id="introText">Bismillaah, ku xuso xuska Subaxdii iyo Galabtii si aad u hesho ammaanada Eebe.</p>
     </div>
     
     <div class="adhkar-container" id="adhkarContainer">
       <div class="loading">
-        <p>Soo dejineynaa xuska...</p>
+        <p id="loadingText">Soo dejineynaa xuska...</p>
       </div>
     </div>
   </div>
@@ -383,7 +84,7 @@
   
   <div class="settings-menu" id="settingsMenu">
     <div class="settings-header">
-      <h2>Dejinta</h2>
+      <h2 id="settingsTitle">Dejinta</h2>
       <button class="close-settings" id="closeSettings">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -393,264 +94,32 @@
     </div>
     
     <div class="setting-option">
-      <h3>Cabbirka Font</h3>
+      <h3 id="fontSizeLabel">Cabbirka Font</h3>
       <select id="fontSizeSelect">
-        <option value="1.5rem">Yar</option>
-        <option value="1.8rem" selected>Caadi</option>
-        <option value="2.2rem">Weyn</option>
+        <option value="1.5rem" id="fontSmall">Yar</option>
+        <option value="1.8rem" selected id="fontMedium">Caadi</option>
+        <option value="2.2rem" id="fontLarge">Weyn</option>
       </select>
     </div>
     
     <div class="setting-option">
-      <h3>Middo</h3>
+      <h3 id="themeLabel">Middo</h3>
       <select id="themeSelect">
-        <option value="light">Iftiin</option>
-        <option value="dark">Gudcur</option>
+        <option value="light" id="themeLight">Iftiin</option>
+        <option value="dark" id="themeDark">Gudcur</option>
+      </select>
+    </div>
+
+    <div class="setting-option">
+      <h3 id="languageLabel">Luqad</h3>
+      <select id="languageSelect">
+        <option value="so" id="langSo">Soomaali</option>
+        <option value="en" id="langEn">English</option>
+        <option value="ar" id="langAr">العربية</option>
       </select>
     </div>
   </div>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // DOM Elements
-      const subaxBtn = document.getElementById('subaxBtn');
-      const galabBtn = document.getElementById('galabBtn');
-      const adhkarContainer = document.getElementById('adhkarContainer');
-      const settingsBtn = document.getElementById('settingsBtn');
-      const settingsMenu = document.getElementById('settingsMenu');
-      const closeSettings = document.getElementById('closeSettings');
-      const overlay = document.getElementById('overlay');
-      const fontSizeSelect = document.getElementById('fontSizeSelect');
-      const themeSelect = document.getElementById('themeSelect');
-      
-      // State
-      let currentTime = 'subax';
-      let adhkarData = null;
-      let completedDhikr = JSON.parse(localStorage.getItem('completedDhikr')) || {};
-      let lastResetDate = localStorage.getItem('lastResetDate') || '';
-      
-      // Initialize app
-      fetchAdhkar();
-      checkForReset();
-      setInterval(checkForReset, 60000); // Check every minute
-      
-      // Event Listeners
-      subaxBtn.addEventListener('click', () => switchTime('subax'));
-      galabBtn.addEventListener('click', () => switchTime('galab'));
-      settingsBtn.addEventListener('click', openSettings);
-      closeSettings.addEventListener('click', closeSettingsMenu);
-      overlay.addEventListener('click', closeSettingsMenu);
-      
-      fontSizeSelect.addEventListener('change', function() {
-        document.querySelectorAll('.dhikr-arabic').forEach(el => {
-          el.style.fontSize = this.value;
-        });
-        localStorage.setItem('fontSize', this.value);
-      });
-      
-      themeSelect.addEventListener('change', function() {
-        if (this.value === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-        localStorage.setItem('theme', this.value);
-      });
-      
-      // Load saved settings
-      if (localStorage.getItem('fontSize')) {
-        fontSizeSelect.value = localStorage.getItem('fontSize');
-        document.querySelectorAll('.dhikr-arabic').forEach(el => {
-          el.style.fontSize = localStorage.getItem('fontSize');
-        });
-      }
-      
-      if (localStorage.getItem('theme')) {
-        themeSelect.value = localStorage.getItem('theme');
-        if (localStorage.getItem('theme') === 'dark') {
-          document.documentElement.classList.add('dark');
-        }
-      }
-      
-      // Functions
-      function checkForReset() {
-        const now = new Date();
-        const currentHour = now.getHours();
-        const currentMinute = now.getMinutes();
-        const today = now.toDateString();
-        
-        // Check if it's 3:00 PM (15:00) or 4:00 AM (4:00)
-        const shouldResetMorning = (currentHour === 4 && currentMinute === 0);
-        const shouldResetEvening = (currentHour === 15 && currentMinute === 0);
-        
-        if ((shouldResetMorning || shouldResetEvening) && lastResetDate !== today) {
-          resetAllCounts();
-          lastResetDate = today;
-          localStorage.setItem('lastResetDate', today);
-        }
-      }
-      
-      function resetAllCounts() {
-        completedDhikr = {};
-        localStorage.setItem('completedDhikr', JSON.stringify(completedDhikr));
-        renderAdhkar(currentTime);
-        
-        // Show notification
-        if ('Notification' in window && Notification.permission === 'granted') {
-          new Notification('Xuska Subaxdii iyo Galabtii', {
-            body: 'Dib loo cusbooneysiiyay tirooyinka xuska'
-          });
-        }
-      }
-      
-      function fetchAdhkar() {
-        fetch('data.json')
-          .then(response => response.json())
-          .then(data => {
-            adhkarData = data.xuska;
-            renderAdhkar(currentTime);
-          })
-          .catch(error => {
-            console.error('Error fetching adhkar:', error);
-            adhkarContainer.innerHTML = '<div class="loading"><p>Khalad ka dhacay soo dejinta xuska. Fadlan isku day mar kale.</p></div>';
-          });
-      }
-      
-      function switchTime(time) {
-        currentTime = time;
-        
-        if (time === 'subax') {
-          subaxBtn.classList.add('active');
-          galabBtn.classList.remove('active');
-        } else {
-          subaxBtn.classList.remove('active');
-          galabBtn.classList.add('active');
-        }
-        
-        renderAdhkar(time);
-      }
-      
-      function renderAdhkar(time) {
-        if (!adhkarData) return;
-        
-        const adhkarList = adhkarData[time];
-        let html = '';
-        
-        adhkarList.forEach((dhikr, index) => {
-          const dhikrId = `${time}-${index}`;
-          const currentCount = completedDhikr[dhikrId] || 0;
-          const targetCount = parseInt(dhikr.tiro) || 1;
-          const isCompleted = currentCount >= targetCount;
-          
-          html += `
-            <div class="dhikr-card" data-id="${dhikrId}">
-              ${dhikr.bilow ? `<p class="dhikr-arabic">${dhikr.bilow}</p>` : ''}
-              <p class="dhikr-arabic">${dhikr.duco}</p>
-              <div class="counter-controls">
-                <button class="counter-btn" onclick="resetCount('${dhikrId}')" title="Dib u bilow">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 18c4.667 4.667 12 1.833 12-4.042h-3l5-6 5 6h-3c-1.125 7.98-11.594 11.104-16 4.042zm14-11.984c-4.667-4.667-12-1.834-12 4.041h3l-5 6-5-6h3c1.125-7.979 11.594-11.104 16-4.041z"/></svg>
-                </button>
-                <div class="counter-display">${currentCount}/${targetCount}</div>
-                ${isCompleted ? '<span class="completed"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>' : ''}
-                <button class="counter-btn plus-btn" onclick="incrementCount('${dhikrId}')">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          `;
-        });
-        
-        adhkarContainer.innerHTML = html;
-        
-        // Apply saved font settings to newly rendered elements
-        if (localStorage.getItem('fontSize')) {
-          document.querySelectorAll('.dhikr-arabic').forEach(el => {
-            el.style.fontSize = localStorage.getItem('fontSize');
-          });
-        }
-      }
-      
-      function openSettings() {
-        settingsMenu.classList.add('open');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-      
-      function closeSettingsMenu() {
-        settingsMenu.classList.remove('open');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-      
-      // Make these functions available globally for the buttons in the HTML
-      window.incrementCount = function(dhikrId) {
-        if (!completedDhikr[dhikrId]) {
-          completedDhikr[dhikrId] = 0;
-        }
-        
-        const targetCount = parseInt(adhkarData[dhikrId.split('-')[0]][parseInt(dhikrId.split('-')[1])].tiro) || 1;
-        
-        if (completedDhikr[dhikrId] < targetCount) {
-          completedDhikr[dhikrId]++;
-          localStorage.setItem('completedDhikr', JSON.stringify(completedDhikr));
-          updateCounterDisplay(dhikrId);
-        }
-      };
-      
-      window.resetCount = function(dhikrId) {
-        if (completedDhikr[dhikrId] && completedDhikr[dhikrId] > 0) {
-          completedDhikr[dhikrId] = 0;
-          localStorage.setItem('completedDhikr', JSON.stringify(completedDhikr));
-          updateCounterDisplay(dhikrId);
-        }
-      };
-      
-      function updateCounterDisplay(dhikrId) {
-        const card = document.querySelector(`.dhikr-card[data-id="${dhikrId}"]`);
-        if (!card) return;
-        
-        const currentCount = completedDhikr[dhikrId] || 0;
-        const targetCount = parseInt(adhkarData[dhikrId.split('-')[0]][parseInt(dhikrId.split('-')[1])].tiro) || 1;
-        const isCompleted = currentCount >= targetCount;
-        
-        const counterDisplay = card.querySelector('.counter-display');
-        const completedSpan = card.querySelector('.completed');
-        
-        if (counterDisplay) {
-          counterDisplay.textContent = `${currentCount}/${targetCount}`;
-        }
-        
-        if (isCompleted) {
-          if (!completedSpan) {
-            const newSpan = document.createElement('span');
-            newSpan.className = 'completed';
-            newSpan.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-            counterDisplay.insertAdjacentElement('afterend', newSpan);
-            if('vibrate' in navigator) {
-              navigator.vibrate([100, 30, 100, 30, 100, 30, 200, 30, 200, 30, 200, 30, 100, 30, 100, 30, 100]);
-            }
-          }
-        } else {
-          if (completedSpan) {
-            completedSpan.remove();
-          }
-        }
-      }
-
-      // Request notification permission
-      if ('Notification' in window) {
-        Notification.requestPermission();
-      }
-    });
-    window.addEventListener('pageshow', () => {
-      const time = new URLSearchParams(window.location.search).get('time');
-      if(time) {
-        switchTime(time)
-      }
-    })
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
